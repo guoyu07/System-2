@@ -164,6 +164,11 @@
 			<groupId>org.apache.velocity</groupId>
 			<version>${velocity-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.8</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -184,6 +189,11 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
+			<plugin>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok-maven-plugin</artifactId>
+				<version>1.16.6.1</version>
+			</plugin>
         </plugins>
 	</build>
 
