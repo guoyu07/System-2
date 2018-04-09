@@ -2,6 +2,10 @@ package net.chenlin.dp.modules.sys.controller;
 
 import java.io.IOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,39 +29,40 @@ import net.chenlin.dp.modules.sys.service.SysUserService;
 @RestController
 @RequestMapping("/sys")
 public class SysLoginController extends AbstractController {
-	
-	@Autowired
-	private SysUserService sysUserService;
-	
-	/**
-	 * 登录
-	 */
-	@SysLog("登录")
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public R login(String username, String password)throws IOException {
-		SysUserEntity user = sysUserService.getByUserName(username);
-		password = MD5Utils.encrypt(username, password);
-		
-		if(user == null || !user.getPassword().equals(password)) {
-			return R.error("用户名或密码错误");
-		}
-		
-		if(user.getStatus() == 0) {
-			return R.error("账号已被锁定,请联系管理员");
-		}
-	    
-		return sysUserService.saveUserToken(user.getUserId());
-	}
-	
-	/**
-	 * 退出
-	 */
-	@SysLog("退出系统")
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public R logout() {
-		R r = sysUserService.updateUserToken(getUserId());
-		ShiroUtils.logout();
-		return r;
-	}
-	
+    //logback
+    private final static Logger logger = LoggerFactory.getLogger(SysLoginController.class);
+    @Autowired
+    private SysUserService sysUserService;
+
+    /**
+     * 登录
+     */
+    @SysLog("登录")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public R login(String username, String password) throws IOException {
+        SysUserEntity user = sysUserService.getByUserName(username);
+        password = MD5Utils.encrypt(username, password);
+        logger.debug("登录==" + user.toString());
+        if (user == null || !user.getPassword().equals(password)) {
+            return R.error("用户名或密码错误");
+        }
+
+        if (user.getStatus() == 0) {
+            return R.error("账号已被锁定,请联系管理员");
+        }
+
+        return sysUserService.saveUserToken(user.getUserId());
+    }
+
+    /**
+     * 退出
+     */
+    @SysLog("退出系统")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public R logout() {
+        R r = sysUserService.updateUserToken(getUserId());
+        ShiroUtils.logout();
+        return r;
+    }
+
 }

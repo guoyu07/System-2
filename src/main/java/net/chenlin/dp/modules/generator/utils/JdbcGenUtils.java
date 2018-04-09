@@ -22,14 +22,14 @@ public class JdbcGenUtils {
     public static void main(String[] args) throws Exception {
 
         String jdbcDriver = "com.mysql.jdbc.Driver";
-        String jdbcUrl = "jdbc:mysql://127.0.0.1:3306/dp-lte-boot?useUnicode=true&characterEncoding=utf-8";
+        String jdbcUrl = "jdbc:mysql://118.24.122:3306/tyb?useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false";
         String jdbcUsername = "root";
         String jdbcPassword = "xzm348701";
 
-        String tablePrefix = "gen_";
+        String tablePrefix = "tyb_";
 
-        String javaModule = "test";
-        String webModule = "test";
+        String javaModule = "tyb";
+        String webModule = "tyb";
 
         generatorCode(jdbcDriver, jdbcUrl, jdbcUsername, jdbcPassword, tablePrefix, javaModule, webModule);
 

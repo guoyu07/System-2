@@ -13,20 +13,20 @@ MySQL - 5.5.48 : Database - dp-lte-boot
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0 */;
 /*!40101 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES = @@SQL_NOTES, SQL_NOTES = 0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS */`tyb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS */`dp-lte-boot` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `tyb`;
+USE `dp-lte-boot`;
 
 /*Table structure for table `sys_menu` */
 
-DROP TABLE IF EXISTS `tyb`;
+DROP TABLE IF EXISTS `tyb_Handan_pai_hang`;
 
 /*   private String title;
         private String productType;
         private String orderTime;
         private String point;
         private String profit;*/
-CREATE TABLE `Handan_pai_hang` (
+CREATE TABLE `tyb_Handan_pai_hang` (
   `id`          INT(100)  NOT NULL AUTO_INCREMENT
   COMMENT 'id',
   `title`       VARCHAR(20)        DEFAULT NULL
@@ -41,9 +41,11 @@ CREATE TABLE `Handan_pai_hang` (
   COMMENT '盈利点',
   #   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   #   `updata_time` datetime DEFAULT NULL COMMENT '修改时间',
-  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '创建时间',
-  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '修改时间',
   PRIMARY KEY (`id`)
 )
@@ -53,7 +55,7 @@ CREATE TABLE `Handan_pai_hang` (
   COMMENT = '老师喊单排行表';
 
 /*Data for the table `sys_menu` */
-INSERT INTO Handan_pai_hang (title, productType, orderTime, point, profit)
+INSERT INTO tyb_Handan_pai_hang (title, productType, orderTime, point, profit)
 VALUES ('鬼师老师', '现货铜', '23:05', '31512', '220.3%'),
   ('大兵老师', '现货铜', '21:05', '315212', '223.3%');
 
@@ -80,20 +82,24 @@ mysql>ALTER  TABLE  `table_name`  ADD  INDEX index_name (  `column1`,  `column2`
         private String mobile;
         private String photo;
         private int ispush;*/
-CREATE TABLE `user` (
-  `u_id`          INT(100)  NOT NULL AUTO_INCREMENT
+CREATE TABLE `tyb_user` (
+  `u_id`        INT(100)  NOT NULL AUTO_INCREMENT
   COMMENT 'id',
-  `u_nickname`    VARCHAR(20)        DEFAULT NULL
+  `u_nickname`  VARCHAR(20)        DEFAULT NULL
   COMMENT '用户昵称',
-  `u_mobile`      VARCHAR(50)        DEFAULT NULL
+  `u_mobile`    VARCHAR(20)        DEFAULT NULL
   COMMENT '电话号码',
-  `u_photo`       VARCHAR(1)       DEFAULT NULL
+  `u_password`  VARCHAR(20)        DEFAULT NULL
+  COMMENT '用户密码',
+  `u_photo`     VARCHAR(20)        DEFAULT NULL
   COMMENT '头像链接',
-  `u_ispush`      INT(1)             DEFAULT 1
+  `u_ispush`    INT(1)             DEFAULT 1
   COMMENT '是否推送 默认1推送',
-  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '创建时间',
-  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '修改时间',
   INDEX (u_mobile),
   PRIMARY KEY (`u_id`)
@@ -103,20 +109,22 @@ CREATE TABLE `user` (
   DEFAULT CHARSET = utf8
   COMMENT = '用户信息表';
 
-INSERT INTO user(u_nickname, u_mobile, u_photo, u_ispush) VALUE ('小徐','18907447909','url','1');
-INSERT INTO user(u_nickname, u_mobile, u_photo, u_ispush) VALUE ('老王','18574403920','url','0');
+INSERT INTO tyb_user (u_nickname, u_mobile, u_password, u_photo, u_ispush) VALUE ('小徐', '18907447909', 'xzm123456','url', '1');
+INSERT INTO tyb_user (u_nickname, u_mobile, u_password, u_photo, u_ispush) VALUE ('老王', '18574403920', 'xzm123456','url', '0');
 
 
-CREATE TABLE `user_group` (
+CREATE TABLE `tyb_user_group` (
   `id`          INT(100)  NOT NULL AUTO_INCREMENT
   COMMENT 'id',
-  `group`    int(1)  DEFAULT 1
+  `group`       int(1)             DEFAULT 1
   COMMENT '用户等级默认 1级',
-  `mobile`    VARCHAR(11)  DEFAULT NULL
+  `mobile`      VARCHAR(11)        DEFAULT NULL
   COMMENT '手机号',
-  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '创建时间',
-  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '修改时间',
   PRIMARY KEY (`id`)
 )
@@ -124,19 +132,21 @@ CREATE TABLE `user_group` (
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8
   COMMENT = '用户等级表';
-INSERT INTO user_group(mobile) VALUE ('18907447909');
+INSERT INTO user_group (mobile) VALUE ('18907447909');
 
 
-CREATE TABLE `cai_jing_yao_wen` (
+CREATE TABLE `tyb_cai_jing_yao_wen` (
   `id`          INT(100)  NOT NULL AUTO_INCREMENT
   COMMENT 'id',
-  `group`    int(1)  DEFAULT 1
+  `group`       int(1)             DEFAULT 1
   COMMENT '用户等级默认 1级',
-  `mobile`    VARCHAR(11)  DEFAULT NULL
+  `mobile`      VARCHAR(11)        DEFAULT NULL
   COMMENT '手机号',
-  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '创建时间',
-  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updata_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ON UPDATE CURRENT_TIMESTAMP
   COMMENT '修改时间',
   PRIMARY KEY (`id`)
 )
@@ -144,7 +154,8 @@ CREATE TABLE `cai_jing_yao_wen` (
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8
   COMMENT = '用户等级表';
-INSERT INTO user_group(mobile) VALUE ('18907447909');
+
+INSERT INTO tyb_user_group (mobile) VALUE ('18907447909');
 # INSERT INTO user_group(group,mobile) VALUE (3,'18574403920');
 # /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 # /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

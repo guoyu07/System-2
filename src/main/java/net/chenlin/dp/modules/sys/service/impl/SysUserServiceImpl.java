@@ -110,6 +110,7 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public R saveUserToken(Long userId) {
 		SysUserTokenEntity token = sysUserManager.saveUserToken(userId);
+
 		R r = R.ok().put("token", token.getToken()).put("expire", token.getGmtExpire());
 		return r;
 	}

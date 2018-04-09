@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>DP-BOOT开发框架</title>
+<title>现货管理系统</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="login" id="dpLTE" v-cloak>
-		<div class="message">DP-BOOT 管理登录</div>
+		<div class="message">现货管理系统登录</div>
 		<div id="darkbannerwrap"></div>
 		<form method="post">
 			<div v-if="error" class="alert alert-danger alert-dismissible">
@@ -67,9 +67,9 @@
 						data : data,
 						dataType : "json",
 						success : function(result) {
-							if (result.code == 0) {//登录成功
+							if (result.code === 0) {//登录成功
 								localStorage.setItem("token", result.token);
-								parent.location.href = 'index.html';
+								parent.location.href = 'index_tab.html';
 							} else {
 								vm.error = true;
 								vm.errorMsg = result.msg;

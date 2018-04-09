@@ -90,5 +90,17 @@ public class CommonUtils {
 			}
 		}
 	}
+
+	/**
+	 *
+	 * @param data
+	 * @return
+	 */
+	public static R DataMsg(Object data,String msg) {
+		if(isNullOrEmpty(data)){
+			return R.error("数据为空");
+		}
+		return R.ok(msg).put(SystemConstant.DATA_ROWS, data);
+	}
 	
 }

@@ -1,5 +1,6 @@
 package net.chenlin.dp.modules.sys.oauth2;
 
+import net.chenlin.dp.modules.sys.controller.SysLoginController;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.shiro.authc.AuthenticationException;
@@ -8,6 +9,8 @@ import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 
 import net.chenlin.dp.common.entity.R;
 import net.chenlin.dp.common.utils.JSONUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -24,8 +27,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class OAuth2Filter extends AuthenticatingFilter {
 
+    private final static Logger logger = LoggerFactory.getLogger(OAuth2Filter.class);
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
+
         //获取请求token
         String token = getRequestToken((HttpServletRequest) request);
 
@@ -89,6 +94,7 @@ public class OAuth2Filter extends AuthenticatingFilter {
         if(StringUtils.isBlank(token)){
             token = httpRequest.getParameter("token");
         }
+        logger.debug("=获取的Token==" + token);
         return token;
     }
 

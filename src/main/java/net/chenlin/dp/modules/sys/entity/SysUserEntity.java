@@ -12,6 +12,7 @@ import java.util.List;
  * @url www.chenlintech.com
  * @date 2017年8月8日 下午2:42:32
  */
+
 public class SysUserEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -190,4 +191,22 @@ public class SysUserEntity implements Serializable {
 		this.roleIdList = roleIdList;
 	}
 
+	@Override
+	public String toString() {
+		return "SysUserEntity{" +
+				"userId=" + userId +
+				", orgId=" + orgId +
+				", orgName='" + orgName + '\'' +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				", mobile='" + mobile + '\'' +
+				", status=" + status +
+				", userIdCreate=" + userIdCreate +
+				", remark='" + remark + '\'' +
+				", gmtCreate=" + gmtCreate +
+				", gmtModified=" + gmtModified +
+				", roleIdList=" + roleIdList +
+				'}';
+	}
 }
