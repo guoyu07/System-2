@@ -10,7 +10,7 @@ var url = function(name) {
 
 //登录token
 var token = localStorage.getItem("token");
-if(token == 'null'){
+if(token === 'null'){
     parent.location.href = 'login.html';
 }
 
